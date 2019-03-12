@@ -7,8 +7,8 @@ import tech.lideo.flywithus.controller.dto.UserDto;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public UserDto get(@PathVariable Long id) {
+    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
+    public UserDto get(@PathVariable String login) {
         return null;
     }
 

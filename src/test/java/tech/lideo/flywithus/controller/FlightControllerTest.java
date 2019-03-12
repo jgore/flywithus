@@ -16,16 +16,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserController.class)
+@WebMvcTest(FlightController.class)
 @ContextConfiguration(classes = FlywithusApplication.class)
-public class UserControllerTest {
+public class FlightControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void getProduct() throws Exception {
-        mockMvc.perform(get("/api/user/leon")
+        mockMvc.perform(get("/api/flight/1")
                 .contentType(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -33,7 +33,7 @@ public class UserControllerTest {
 
     @Test
     public void saveProduct() throws Exception {
-        mockMvc.perform(post("/api/user")
+        mockMvc.perform(post("/api/flight")
                 .contentType(APPLICATION_JSON)
                 .content("{}"))
                 .andDo(print())
