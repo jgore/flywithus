@@ -8,7 +8,7 @@ public class FlightDto {
     private Long userId;
     private Date departure;
     private Date arrival;
-    private int passengers;
+    private int passengersAmount;
     private BigDecimal price;
 
     private boolean fastBriefing;
@@ -38,12 +38,12 @@ public class FlightDto {
         this.arrival = arrival;
     }
 
-    public int getPassengers() {
-        return passengers;
+    public int getPassengersAmount() {
+        return passengersAmount;
     }
 
-    public void setPassengers(int passengers) {
-        this.passengers = passengers;
+    public void setPassengersAmount(int passengersAmount) {
+        this.passengersAmount = passengersAmount;
     }
 
     public BigDecimal getPrice() {
