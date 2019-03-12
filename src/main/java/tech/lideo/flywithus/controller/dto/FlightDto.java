@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class FlightDto {
 
-    private Long userId;
+    private String userLogin;
     private Date departure;
     private Date arrival;
     private int passengersAmount;
@@ -14,12 +14,12 @@ public class FlightDto {
     private boolean fastBriefing;
     private FlightStatus status;
 
-    public Long getUserId() {
-        return userId;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserId(Long FlightId) {
-        this.userId = FlightId;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public Date getDeparture() {

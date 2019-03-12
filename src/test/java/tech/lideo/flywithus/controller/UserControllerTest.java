@@ -2,13 +2,21 @@ package tech.lideo.flywithus.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlywithusApplication;
+import tech.lideo.flywithus.controller.dto.UserDto;
+import tech.lideo.flywithus.service.UserService;
 
+import static com.sun.javaws.JnlpxArgs.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -23,12 +31,17 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private UserService userService;
+
     @Test
     public void getProduct() throws Exception {
         mockMvc.perform(get("/api/user/leon")
                 .contentType(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+
+        Mockito.verify(userService, times(1)).get(anyString());
     }
 
     @Test
@@ -39,5 +52,6 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
+        Mockito.verify(userService, times(1)).create(any(UserDto.class));
     }
 }
