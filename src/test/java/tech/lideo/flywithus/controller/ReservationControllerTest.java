@@ -2,55 +2,36 @@ package tech.lideo.flywithus.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlywithusApplication;
-import tech.lideo.flywithus.controller.dto.UserDto;
-import tech.lideo.flywithus.service.UserService;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
+import static org.junit.Assert.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserController.class)
+@WebMvcTest(ReservationController.class)
 @ContextConfiguration(classes = FlywithusApplication.class)
-public class UserControllerTest {
+public class ReservationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private UserService userService;
-
     @Test
-    public void getUser() throws Exception {
-        mockMvc.perform(get("/api/user/leon")
-                .contentType(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+    public void createReservation() throws Exception {
 
-        Mockito.verify(userService, times(1)).get(anyString());
-    }
-
-    @Test
-    public void saveUser() throws Exception {
-        mockMvc.perform(post("/api/user")
+        mockMvc.perform(post("/api/reservation")
                 .contentType(APPLICATION_JSON)
                 .content("{}"))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Mockito.verify(userService, times(1)).create(any(UserDto.class));
     }
 }

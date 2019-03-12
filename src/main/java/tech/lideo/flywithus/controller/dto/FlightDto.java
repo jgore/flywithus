@@ -5,37 +5,52 @@ import java.util.Date;
 
 public class FlightDto {
 
-    private String userLogin;
-    private Date departure;
-    private Date arrival;
+    private Long id;
+    private String departureCity;
+    private Date departureDate;
+    private String arrivalCity;
+    private Date arrivalDate;
     private int passengersAmount;
     private BigDecimal price;
 
-    private boolean fastBriefing;
-    private FlightStatus status;
-
-    public String getUserLogin() {
-        return userLogin;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Date getDeparture() {
-        return departure;
+    public String getDepartureCity() {
+        return departureCity;
     }
 
-    public void setDeparture(Date departure) {
-        this.departure = departure;
+    public void setDepartureCity(String departureCity) {
+        this.departureCity = departureCity;
     }
 
-    public Date getArrival() {
-        return arrival;
+    public Date getDepartureDate() {
+        return departureDate;
     }
 
-    public void setArrival(Date arrival) {
-        this.arrival = arrival;
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity = arrivalCity;
+    }
+
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 
     public int getPassengersAmount() {
@@ -53,23 +68,5 @@ public class FlightDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    public FlightStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(FlightStatus status) {
-        this.status = status;
-    }
-
-    public boolean isFastBriefing() {
-        return fastBriefing;
-    }
-
-    public void setFastBriefing(boolean fastBriefing) {
-        this.fastBriefing = fastBriefing;
-    }
-
-
 
 }

@@ -24,15 +24,15 @@ public class FlightControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void getProduct() throws Exception {
-        mockMvc.perform(get("/api/flight/1")
+    public void getFlights() throws Exception {
+        mockMvc.perform(get("/api/flight")
                 .contentType(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void saveProduct() throws Exception {
+    public void createFlight() throws Exception {
         mockMvc.perform(post("/api/flight")
                 .contentType(APPLICATION_JSON)
                 .content("{}"))
