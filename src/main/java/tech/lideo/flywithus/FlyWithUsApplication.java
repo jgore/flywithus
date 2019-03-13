@@ -20,14 +20,14 @@ public class FlyWithUsApplication implements CommandLineRunner {
 
     public static final Gson gson = new Gson();
 
-    @Autowired
+/*    @Autowired
     private FlightRepository flightRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private ReservationService reservationService;
+    private ReservationService reservationService;*/
 
     public static void main(String[] args) {
         SpringApplication.run(FlyWithUsApplication.class, args);
@@ -36,13 +36,13 @@ public class FlyWithUsApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        for (int i = 0; i < 100; i++) {
+     /*   for (int i = 0; i < 100; i++) {
             flightRepository.create(prepareFlight());
         }
 
         for (int i = 0; i < 100; i++) {
             UserDto userDto = prepareUserDto();
-            userDto.setLogin(userDto.getLogin() + i);
+            userDto.setEmail(userDto.getEmail() + i);
 
             userRepository.create(userDto);
         }
@@ -54,12 +54,12 @@ public class FlyWithUsApplication implements CommandLineRunner {
 
             for (long k= 0; k < 10; k++) {
                 ReservationDto reservationDto = new ReservationDto();
-                reservationDto.setUserLogin(userDto.getLogin());
+                reservationDto.setUserEmail(userDto.getEmail());
                 reservationDto.setFlightId(flightDto.getId());
                 reservationService.create(reservationDto);
             }
 
-        }
+        }*/
     }
 
     //@FIXME refactor - copy paste to some common class
@@ -79,7 +79,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
     //@FIXME refactor - copy paste to some common class
     private UserDto prepareUserDto() {
         UserDto userDto = new UserDto();
-        userDto.setLogin("test");
+        userDto.setEmail("test");
         userDto.setPassword("testPW");
         return userDto;
     }

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class ReservationRepositoryImplTest {
 
-    public static final String TEST_LOGIN = "testLogin";
+    public static final String TEST_EMAIL = "testEmail";
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -35,9 +35,9 @@ public class ReservationRepositoryImplTest {
     }
 
     @Test
-    public void getByLogin() {
-        List<ReservationDto> byLogin = reservationRepository.getByLogin(TEST_LOGIN);
-        assertThat(byLogin.size(), equalTo(1));
+    public void getByEmail() {
+        List<ReservationDto> byEmail = reservationRepository.getByEmail(TEST_EMAIL);
+        assertThat(byEmail.size(), equalTo(1));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ReservationRepositoryImplTest {
     private ReservationDto prepareReservation() {
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setFlightId(1L);
-        reservationDto.setUserLogin(TEST_LOGIN);
+        reservationDto.setUserEmail(TEST_EMAIL);
         reservationDto.setPrice(new BigDecimal(9));
         return reservationDto;
     }

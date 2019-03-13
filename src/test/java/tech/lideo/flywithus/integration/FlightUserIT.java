@@ -18,7 +18,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 public class FlightUserIT {
 
-    private final String TEST_LOGIN = "testLogin";
+    private final String TEST_EMAIL = "testEmail";
     private final String TEST_PASSWORD = "testPassword";
 
     @Autowired
@@ -60,7 +60,7 @@ public class FlightUserIT {
     private UserDto prepareUserDto()
     {
         UserDto userDto = new UserDto();
-        userDto.setLogin(TEST_LOGIN+Math.random());
+        userDto.setEmail(TEST_EMAIL+Math.random());
         userDto.setPassword(TEST_PASSWORD);
         return userDto;
     }

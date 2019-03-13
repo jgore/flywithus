@@ -17,10 +17,10 @@ public class UserRepositoryImpl implements UserRepository {
     private List<UserDto> userDtoList = new ArrayList<>();
 
     @Override
-    public UserDto get(String login) {
+    public UserDto get(String email) {
 
         UserDto userFromDb = userDtoList.stream().
-                filter(dto -> dto.getLogin().equals(login))
+                filter(dto -> dto.getEmail().equals(email))
                 .findAny()
                 .orElse(null);
 
@@ -44,7 +44,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public UserDto create(UserDto userDto) {
-        UserDto userFromDb = get(userDto.getLogin());
+        UserDto userFromDb = get(userDto.getEmail());
 
         if (userFromDb != null) {
             throw new IllegalArgumentException("user already exists");
@@ -53,7 +53,7 @@ public class UserRepositoryImpl implements UserRepository {
         UserDto copy = copyUserDto(userDto);
 
         userDtoList.add(copy);
-        logger.info("created user with login" + copy.getLogin() );
+        logger.info("created user with email" + copy.getEmail() );
         return userDto;
     }
 

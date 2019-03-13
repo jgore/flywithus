@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
 
-    public static final String TEST_LOGIN = "testLogin";
+    public static final String TEST_EMAIL = "testEmail";
     public static final String TEST_PASSWORD = "testPassword";
 
     @Mock
@@ -27,14 +27,14 @@ public class UserServiceImplTest {
 
     @Test
     public void get() {
-        userRepository.get(TEST_LOGIN);
+        userRepository.get(TEST_EMAIL);
         verify(userRepository, times(1)).get(anyString());
     }
 
     @Test
     public void create() {
         UserDto userDto = new UserDto();
-        userDto.setLogin(TEST_LOGIN);
+        userDto.setEmail(TEST_EMAIL);
         userDto.setPassword(TEST_PASSWORD);
         userServiceImpl.create(userDto);
 

@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.StatusResultMatchersEx
 @RunWith(SpringRunner.class)
 public class UserRepositoryImplTest {
 
-    private final String TEST_LOGIN = "testLogin";
+    private final String TEST_EMAIL = "testEmail";
     private final String TEST_PASSWORD = "testPassword";
 
     @Autowired
@@ -30,7 +30,7 @@ public class UserRepositoryImplTest {
 
     @Test
     public void getNotExistingUser__ShouldReturnNull() {
-        UserDto userDto = userRepository.get(TEST_LOGIN);
+        UserDto userDto = userRepository.get(TEST_EMAIL);
 
         assertThat(userDto, equalTo(null));
     }
@@ -39,13 +39,13 @@ public class UserRepositoryImplTest {
     public void getExistingUser__shouldReturnUser() {
 
         UserDto userDto = new UserDto();
-        userDto.setLogin(TEST_LOGIN);
+        userDto.setEmail(TEST_EMAIL);
         userDto.setPassword(TEST_PASSWORD);
 
         userRepository.create(userDto);
-        UserDto userDtoFromDb = userRepository.get(TEST_LOGIN);
+        UserDto userDtoFromDb = userRepository.get(TEST_EMAIL);
 
-        assertThat(userDtoFromDb.getLogin(), equalTo(TEST_LOGIN));
+        assertThat(userDtoFromDb.getEmail(), equalTo(TEST_EMAIL));
         assertThat(userDtoFromDb.getPassword(), equalTo(TEST_PASSWORD));
     }
 
@@ -61,7 +61,7 @@ public class UserRepositoryImplTest {
     private UserDto prepareUserDto()
     {
         UserDto userDto = new UserDto();
-        userDto.setLogin(TEST_LOGIN);
+        userDto.setEmail(TEST_EMAIL);
         userDto.setPassword(TEST_PASSWORD);
         return userDto;
     }

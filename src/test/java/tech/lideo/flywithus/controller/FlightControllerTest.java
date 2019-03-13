@@ -4,10 +4,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlyWithUsApplication;
+import tech.lideo.flywithus.service.FlightService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,6 +25,9 @@ public class FlightControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private FlightService flightService;
+
     @Test
     public void getFlights() throws Exception {
         mockMvc.perform(get("/api/flight")
@@ -31,13 +36,4 @@ public class FlightControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void createFlight() throws Exception {
-        mockMvc.perform(post("/api/flight")
-                .contentType(APPLICATION_JSON)
-                .content("{}"))
-                .andDo(print())
-                .andExpect(status().isOk());
-
-    }
 }

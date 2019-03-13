@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByLogin(String login) {
-        return userRepository.get(login);
+    public UserDto getByEmail(String email) {
+        return userRepository.get(email);
     }
 }

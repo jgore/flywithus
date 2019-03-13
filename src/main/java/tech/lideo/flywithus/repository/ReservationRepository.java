@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReservationRepository {
 
-    List<ReservationDto> getByLogin(String login);
+    List<ReservationDto> getByEmail(String email);
     ReservationDto create (ReservationDto reservationDto);
 
     void deleteAll();

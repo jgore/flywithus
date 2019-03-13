@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlyWithUsApplication;
 import tech.lideo.flywithus.controller.dto.UserDto;
+import tech.lideo.flywithus.repository.FlightRepository;
+import tech.lideo.flywithus.repository.UserRepository;
+import tech.lideo.flywithus.service.ReservationService;
 import tech.lideo.flywithus.service.UserService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,15 +36,15 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-    @Test
-    public void getUser() throws Exception {
-        mockMvc.perform(get("/api/user/leon")
-                .contentType(APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
+    @MockBean
+    private UserRepository userRepository;
 
-        Mockito.verify(userService, times(1)).getByLogin(anyString());
-    }
+    @MockBean
+    private FlightRepository flightRepository;
+
+    @MockBean
+    private ReservationService reservationService;
+
 
     @Test
     public void saveUser() throws Exception {

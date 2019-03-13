@@ -18,10 +18,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     private static final List<ReservationDto> reservations = new ArrayList<>();
 
     @Override
-    public List<ReservationDto> getByLogin(String login) {
+    public List<ReservationDto> getByEmail(String email) {
 
         return reservations.stream()
-                .filter(dto -> login.equals(dto.getUserLogin()))
+                .filter(dto -> email.equals(dto.getUserEmail()))
                 .map(this::copyReservation)
                 .collect(Collectors.toList());
     }
@@ -30,7 +30,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public ReservationDto create(ReservationDto reservationDto) {
         reservations.add(copyReservation(reservationDto));
 
-        logger.info("created reservation for user with login :" + reservationDto.getUserLogin());
+        logger.info("created reservation for user with email :" + reservationDto.getUserEmail());
 
         return reservationDto;
     }

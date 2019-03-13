@@ -20,9 +20,4 @@ public class ReservationController {
         return reservationService.create(reservationDto);
     }
 
-    @RequestMapping(value = "{login}",method = RequestMethod.GET)
-    public List<ReservationDto> getByLogin(@PathVariable("login")  String login) {
-        return reservationService.getByLogin(login);
-    }
-
 }

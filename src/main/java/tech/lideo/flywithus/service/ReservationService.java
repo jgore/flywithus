@@ -7,6 +7,6 @@ import java.util.List;
 public interface ReservationService {
 
     ReservationDto create (ReservationDto reservationDto);
-    List<ReservationDto> getByLogin(String login );
+    List<ReservationDto> getByEmail(String email );
 
 }

@@ -10,6 +10,7 @@ import tech.lideo.flywithus.repository.ReservationRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -29,11 +30,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public ReservationDto create(ReservationDto reservationDto) {
 
-        String userLogin = reservationDto.getUserLogin();
-        UserDto userByLogin = userService.getByLogin(userLogin);
+        String userEmail = reservationDto.getUserEmail();
+        UserDto userByEmail = userService.getByEmail(userEmail);
 
-        if (userByLogin == null) {
-            throw new IllegalArgumentException("user with given login does not exist : login =" + userLogin);
+        if (userByEmail == null) {
+            throw new IllegalArgumentException("user with given email does not exist : email =" + userEmail);
         }
 
         Long flightId = reservationDto.getFlightId();
@@ -43,15 +44,17 @@ public class ReservationServiceImpl implements ReservationService {
             throw new IllegalArgumentException("flight with given id does not exist : id =" + flightId);
         }
 
-        BigDecimal price = priceService.calculateReservation(userByLogin, flightDto, reservationDto);
+        BigDecimal price = priceService.calculateReservation(userByEmail, flightDto, reservationDto);
         reservationDto.setPrice(price);
+        reservationDto.setReservationSecretCode(UUID.randomUUID());
 
-        return reservationRepository.create(reservationDto);
+         reservationRepository.create(reservationDto);
 
+         return reservationDto;
     }
 
     @Override
-    public List<ReservationDto> getByLogin(String login) {
-        return reservationRepository.getByLogin(login);
+    public List<ReservationDto> getByEmail(String email) {
+        return reservationRepository.getByEmail(email);
     }
 }

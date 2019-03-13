@@ -31,25 +31,32 @@ public class ReservationServiceImplTest {
     @Mock
     private FlightRepository flightRepository;
 
+    @Mock
+    private PriceService priceService;
+
     @InjectMocks
     private ReservationServiceImpl reservationServiceImpl;
 
     @Before
     public void setup() {
-        when(userService.getByLogin(any())).thenReturn(new UserDto());
+        when(userService.getByEmail(any())).thenReturn(new UserDto());
         when(flightRepository.get(any())).thenReturn( new FlightDto());
     }
 
     @Test
-    public void create() {
-        reservationServiceImpl.create(new ReservationDto());
+    public void create__shouldHaveSecretReservationCode() {
+        ReservationDto reservationDto = reservationServiceImpl.create(new ReservationDto() );
+
+        assertNotNull( reservationDto.getReservationSecretCode() );
         verify(reservationRepository, times(1)).create(any(ReservationDto.class));
     }
 
-    @Test
-    public void getByLogin() {
-        reservationServiceImpl.getByLogin("testLogin");
 
-        verify(reservationRepository, times(1)).getByLogin(any());
+
+    @Test
+    public void getByEmail() {
+        reservationServiceImpl.getByEmail("testEmail");
+
+        verify(reservationRepository, times(1)).getByEmail(any());
     }
 }
