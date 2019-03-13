@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import tech.lideo.flywithus.FlywithusApplication;
+import tech.lideo.flywithus.FlyWithUsApplication;
 import tech.lideo.flywithus.controller.dto.UserDto;
 import tech.lideo.flywithus.service.UserService;
 
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
-@ContextConfiguration(classes = FlywithusApplication.class)
+@ContextConfiguration(classes = FlyWithUsApplication.class)
 public class UserControllerTest {
 
     @Autowired

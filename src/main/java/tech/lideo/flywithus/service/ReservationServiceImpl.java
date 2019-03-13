@@ -8,6 +8,7 @@ import tech.lideo.flywithus.controller.dto.UserDto;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.ReservationRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -22,13 +23,16 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Autowired
+    private PriceService priceService;
+
     @Override
     public ReservationDto create(ReservationDto reservationDto) {
 
         String userLogin = reservationDto.getUserLogin();
-        UserDto byLogin = userService.getByLogin(userLogin);
+        UserDto userByLogin = userService.getByLogin(userLogin);
 
-        if (byLogin == null) {
+        if (userByLogin == null) {
             throw new IllegalArgumentException("user with given login does not exist : login =" + userLogin);
         }
 
@@ -38,6 +42,9 @@ public class ReservationServiceImpl implements ReservationService {
         if (flightDto == null) {
             throw new IllegalArgumentException("flight with given id does not exist : id =" + flightId);
         }
+
+        BigDecimal price = priceService.calculateReservation(userByLogin, flightDto, reservationDto);
+        reservationDto.setPrice(price);
 
         return reservationRepository.create(reservationDto);
 

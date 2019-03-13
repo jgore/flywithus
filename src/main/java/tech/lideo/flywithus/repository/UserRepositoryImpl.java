@@ -3,7 +3,7 @@ package tech.lideo.flywithus.repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import tech.lideo.flywithus.FlywithusApplication;
+import tech.lideo.flywithus.FlyWithUsApplication;
 import tech.lideo.flywithus.controller.dto.UserDto;
 
 import java.util.ArrayList;
@@ -58,8 +58,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private UserDto copyUserDto(UserDto userDto) {
-        String jsonUserDto = FlywithusApplication.gson.toJson(userDto);
-        return FlywithusApplication.gson.fromJson(jsonUserDto, UserDto.class);
+        String jsonUserDto = FlyWithUsApplication.gson.toJson(userDto);
+        return FlyWithUsApplication.gson.fromJson(jsonUserDto, UserDto.class);
     }
 
 }

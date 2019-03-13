@@ -3,7 +3,7 @@ package tech.lideo.flywithus.repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import tech.lideo.flywithus.FlywithusApplication;
+import tech.lideo.flywithus.FlyWithUsApplication;
 import tech.lideo.flywithus.controller.dto.ReservationDto;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     private ReservationDto copyReservation(ReservationDto reservationDto) {
-        String jsonFlightDto = FlywithusApplication.gson.toJson(reservationDto);
-        return FlywithusApplication.gson.fromJson(jsonFlightDto, ReservationDto.class);
+        String jsonFlightDto = FlyWithUsApplication.gson.toJson(reservationDto);
+        return FlyWithUsApplication.gson.fromJson(jsonFlightDto, ReservationDto.class);
     }
 }

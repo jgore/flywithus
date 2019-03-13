@@ -58,4 +58,5 @@ public class ReservationDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
 }

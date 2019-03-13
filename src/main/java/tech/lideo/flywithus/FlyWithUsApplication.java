@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @SpringBootApplication
-public class FlywithusApplication implements CommandLineRunner {
+public class FlyWithUsApplication implements CommandLineRunner {
 
     public static final Gson gson = new Gson();
 
@@ -30,7 +30,7 @@ public class FlywithusApplication implements CommandLineRunner {
     private ReservationService reservationService;
 
     public static void main(String[] args) {
-        SpringApplication.run(FlywithusApplication.class, args);
+        SpringApplication.run(FlyWithUsApplication.class, args);
     }
 
     @Override

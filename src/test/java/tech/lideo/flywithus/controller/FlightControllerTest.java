@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import tech.lideo.flywithus.FlywithusApplication;
+import tech.lideo.flywithus.FlyWithUsApplication;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(FlightController.class)
-@ContextConfiguration(classes = FlywithusApplication.class)
+@ContextConfiguration(classes = FlyWithUsApplication.class)
 public class FlightControllerTest {
 
     @Autowired
