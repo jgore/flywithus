@@ -1,13 +1,20 @@
 package tech.lideo.flywithus.controller.dto;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class ReservationDto {
 
     @NotNull
     private Long flightId;
     @NotNull
-    private Long userId;
+    private String userLogin;
+    @NotNull
+    private BigDecimal price;
+
+    public ReservationDto() {
+        status = ReservationStatus.CREATED;
+    }
 
     private boolean fastBriefing;
     private ReservationStatus status;
@@ -20,12 +27,12 @@ public class ReservationDto {
         this.flightId = flightId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public boolean isFastBriefing() {
@@ -42,5 +49,13 @@ public class ReservationDto {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
