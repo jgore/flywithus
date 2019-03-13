@@ -8,9 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tech.lideo.flywithus.controller.dto.UserDto;
 import tech.lideo.flywithus.repository.UserRepository;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
