@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import tech.lideo.flywithus.controller.dto.FlightDto;
 import tech.lideo.flywithus.repository.FlightRepository;
 
+import java.util.List;
+
 @Service
 public class FlightServiceImpl implements FlightService {
 
@@ -17,7 +19,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightDto get(Long id) {
-        return flightRepository.get(id);
+    public List<FlightDto> getAll() {
+        return flightRepository.getAll();
     }
 }

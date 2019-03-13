@@ -34,8 +34,8 @@ public class FlightServiceImplTest {
 
     @Test
     public void get() {
-        flightService.get(0L);
-        verify(flightRepository, times(1)).get(any(Long.class));
+        flightService.getAll();
+        verify(flightRepository, times(1)).getAll();
     }
 
     private FlightDto prepareFlight() {

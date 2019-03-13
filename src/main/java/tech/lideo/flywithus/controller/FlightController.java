@@ -1,7 +1,9 @@
 package tech.lideo.flywithus.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.lideo.flywithus.controller.dto.FlightDto;
+import tech.lideo.flywithus.service.FlightService;
 
 import java.util.List;
 
@@ -10,13 +12,12 @@ import java.util.List;
 @RequestMapping("/api/flight")
 public class FlightController {
 
-    @RequestMapping( method = RequestMethod.GET)
-    public List<FlightDto> get(){
-        return null;
+    @Autowired
+    private FlightService flightService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<FlightDto> getAll() {
+        return flightService.getAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public FlightDto create(@RequestBody FlightDto flightDto) {
-        return null;
-    }
 }

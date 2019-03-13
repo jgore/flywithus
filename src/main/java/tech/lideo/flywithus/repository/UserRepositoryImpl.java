@@ -1,5 +1,7 @@
 package tech.lideo.flywithus.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import tech.lideo.flywithus.FlywithusApplication;
 import tech.lideo.flywithus.controller.dto.UserDto;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private List<UserDto> userDtoList = new ArrayList<>();
 
@@ -46,9 +50,10 @@ public class UserRepositoryImpl implements UserRepository {
             throw new IllegalArgumentException("user already exists");
         }
 
-        UserDto copyUserDto = copyUserDto(userDto);
+        UserDto copy = copyUserDto(userDto);
 
-        userDtoList.add(copyUserDto);
+        userDtoList.add(copy);
+        logger.info("created user with login" + copy.getLogin() );
         return userDto;
     }
 

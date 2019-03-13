@@ -1,5 +1,7 @@
 package tech.lideo.flywithus.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import tech.lideo.flywithus.FlywithusApplication;
 import tech.lideo.flywithus.controller.dto.FlightDto;
@@ -11,9 +13,11 @@ import java.util.stream.Collectors;
 @Repository
 public class FlightRepositoryImpl implements FlightRepository {
 
-    private final List<FlightDto> flights = new ArrayList<>();
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private  Long id = 0L;
+    private static final List<FlightDto> flights = new ArrayList<>();
+
+    private Long id = 0L;
 
     @Override
     public List<FlightDto> getAll() {
@@ -24,9 +28,11 @@ public class FlightRepositoryImpl implements FlightRepository {
 
     @Override
     public FlightDto get(Long id) {
-        return flights.stream().
+        FlightDto flightDto = flights.stream().
                 filter(dto -> id.equals(dto.getId())).
                 findFirst().orElse(null);
+
+        return copyFlightDto(flightDto);
     }
 
     @Override
@@ -38,6 +44,8 @@ public class FlightRepositoryImpl implements FlightRepository {
         FlightDto copy = copyFlightDto(flightDto);
         copy.setId(id++);
         flights.add(copy);
+
+        logger.info("created flight with id =" + copy.getId());
 
         return flightDto;
     }

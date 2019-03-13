@@ -2,8 +2,10 @@ package tech.lideo.flywithus.service;
 
 import tech.lideo.flywithus.controller.dto.FlightDto;
 
+import java.util.List;
+
 public interface FlightService {
 
     FlightDto create (FlightDto flightDto);
-    FlightDto get ( Long id );
+    List<FlightDto> getAll ( );
 }

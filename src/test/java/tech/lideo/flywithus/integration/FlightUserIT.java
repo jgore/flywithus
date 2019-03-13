@@ -42,7 +42,7 @@ public class FlightUserIT {
 
         flightRepository.getCount();
     }
-
+    //@FIXME refactor - copy paste to some common class
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
@@ -56,6 +56,7 @@ public class FlightUserIT {
         return flightDto;
     }
 
+    //@FIXME refactor - copy paste to some common class
     private UserDto prepareUserDto()
     {
         UserDto userDto = new UserDto();
