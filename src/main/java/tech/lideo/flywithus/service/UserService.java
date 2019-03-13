@@ -5,5 +5,5 @@ import tech.lideo.flywithus.controller.dto.UserDto;
 public interface UserService {
 
     UserDto create (UserDto userDto);
-    UserDto get ( String login);
+    UserDto getByLogin(String login);
 }

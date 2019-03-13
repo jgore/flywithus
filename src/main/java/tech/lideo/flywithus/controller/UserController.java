@@ -14,7 +14,7 @@ public class UserController {
 
     @RequestMapping(value = "/{login}", method = RequestMethod.GET)
     public UserDto get(@PathVariable String login) {
-        return userService.get(login);
+        return userService.getByLogin(login);
     }
 
     @RequestMapping(method = RequestMethod.POST)

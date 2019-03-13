@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto get(String login) {
+    public UserDto getByLogin(String login) {
         return userRepository.get(login);
     }
 }

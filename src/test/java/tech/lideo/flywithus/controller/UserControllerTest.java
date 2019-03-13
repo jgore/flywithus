@@ -40,7 +40,7 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Mockito.verify(userService, times(1)).get(anyString());
+        Mockito.verify(userService, times(1)).getByLogin(anyString());
     }
 
     @Test
