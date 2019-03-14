@@ -3,12 +3,13 @@ package tech.lideo.flywithus.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import tech.lideo.flywithus.controller.dto.FlightDto;
-import tech.lideo.flywithus.controller.dto.ReservationDto;
-import tech.lideo.flywithus.controller.dto.ReservationStatus;
-import tech.lideo.flywithus.controller.dto.UserDto;
+import tech.lideo.flywithus.controller.dto.*;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.ReservationRepository;
+import tech.lideo.flywithus.service.payment.PaymentResponse;
+import tech.lideo.flywithus.service.payment.PaymentService;
+import tech.lideo.flywithus.service.payment.PaymentStatus;
+import tech.lideo.flywithus.service.price.PriceService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,6 +27,8 @@ public class ReservationServiceImpl implements ReservationService {
 
     private PriceService priceService;
 
+    private PaymentService paymentService;
+
     private String autoCancelDays;
 
     private String cancelDays;
@@ -35,12 +38,14 @@ public class ReservationServiceImpl implements ReservationService {
                                   UserService userService,
                                   FlightRepository flightRepository,
                                   PriceService priceService,
+                                  PaymentService paymentService,
                                   @Value("${flywithus.autoCancel.days}") String autoCancelDays,
                                   @Value("${flywithus.cancel.days}") String cancelDays) {
         this.reservationRepository = reservationRepository;
         this.userService = userService;
         this.flightRepository = flightRepository;
         this.priceService = priceService;
+        this.paymentService = paymentService;
         this.autoCancelDays = autoCancelDays;
         this.cancelDays = cancelDays;
     }
@@ -89,12 +94,30 @@ public class ReservationServiceImpl implements ReservationService {
         FlightDto flightDto = flightRepository.get(res.getFlightId());
         LocalDate departureDate = flightDto.getDepartureDate();
 
-        if (departureDate.isAfter( LocalDate.now().minusDays(Long.valueOf(cancelDays)))) {
+        if (departureDate.isAfter(LocalDate.now().minusDays(Long.valueOf(cancelDays)))) {
             throw new IllegalArgumentException(" Reservation can be CANCELLED only " + cancelDays + " days before departure");
         }
 
         res.setStatus(ReservationStatus.CANCELLED);
         return reservationRepository.updateStatus(res);
+    }
+
+    @Override
+    public PaymentResponse pay(CreditCardDetailsDto creditCardDetailsDto, UUID reservationSecretCode) {
+        ReservationDto resBySecretCode = reservationRepository.getBySecretCode(reservationSecretCode);
+        if (resBySecretCode == null) {
+            throw new IllegalArgumentException("secret code is incorrect - there is no reservation");
+        }
+
+        PaymentResponse paymentResponse = paymentService.creditCardPayment(creditCardDetailsDto, reservationSecretCode);
+
+        if (PaymentStatus.APPROVED.equals(paymentResponse.getPaymentStatus())) {
+            resBySecretCode.setStatus(ReservationStatus.CONFIRMED);
+            reservationRepository.updateStatus(resBySecretCode);
+        }
+
+        return paymentResponse;
+
     }
 
     @Override

@@ -19,6 +19,7 @@ import java.util.Date;
 
 @SpringBootApplication
 @EnableScheduling
+//Fixme add mock server to payment service
 public class FlyWithUsApplication implements CommandLineRunner {
 
     public static final Gson gson = new Gson();
@@ -39,7 +40,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-   /*     for (int i = 0; i < 100; i++) {
+     /*   for (int i = 0; i < 100; i++) {
             flightRepository.create(prepareFlight());
         }
 

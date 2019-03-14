@@ -1,4 +1,4 @@
-package tech.lideo.flywithus.service;
+package tech.lideo.flywithus.service.price;
 
 import tech.lideo.flywithus.controller.dto.FlightDto;
 import tech.lideo.flywithus.controller.dto.ReservationDto;

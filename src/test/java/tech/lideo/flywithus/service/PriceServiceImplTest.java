@@ -3,15 +3,14 @@ package tech.lideo.flywithus.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import tech.lideo.flywithus.controller.dto.FlightDto;
 import tech.lideo.flywithus.controller.dto.ReservationDto;
 import tech.lideo.flywithus.controller.dto.UserDto;
+import tech.lideo.flywithus.service.price.PriceServiceImpl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

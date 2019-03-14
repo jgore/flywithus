@@ -6,20 +6,23 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-import tech.lideo.flywithus.controller.dto.FlightDto;
-import tech.lideo.flywithus.controller.dto.ReservationDto;
-import tech.lideo.flywithus.controller.dto.ReservationStatus;
-import tech.lideo.flywithus.controller.dto.UserDto;
+import tech.lideo.flywithus.controller.dto.*;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.ReservationRepository;
+import tech.lideo.flywithus.service.payment.PaymentResponse;
+import tech.lideo.flywithus.service.payment.PaymentService;
+import tech.lideo.flywithus.service.payment.PaymentStatus;
+import tech.lideo.flywithus.service.price.PriceService;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.UUID;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -39,6 +42,9 @@ public class ReservationServiceImplTest {
 
     @Mock
     private PriceService priceService;
+
+    @MockBean
+    private PaymentService paymentService;
 
     @InjectMocks
     private ReservationServiceImpl reservationServiceImpl;
@@ -60,6 +66,11 @@ public class ReservationServiceImplTest {
 
         when( reservationRepository.getAll()).thenReturn(Collections.singletonList(reservationDto));
         when( reservationRepository.getByStatus(ReservationStatus.CREATED)).thenReturn(Collections.singletonList(reservationDto));
+
+        PaymentResponse paymentResponse = new PaymentResponse();
+        paymentResponse.setPaymentStatus(PaymentStatus.APPROVED);
+
+        when( paymentService.creditCardPayment(any(), any())).thenReturn( paymentResponse);
         ReflectionTestUtils.setField(reservationServiceImpl, "autoCancelDays", autoCancelDays);
         ReflectionTestUtils.setField(reservationServiceImpl, "cancelDays", cancelDays);
     }
@@ -98,6 +109,13 @@ public class ReservationServiceImplTest {
         verify(reservationRepository, times(1)).updateStatus(any(ReservationDto.class));
     }
 
+    @Test
+    public void pay() {
+        PaymentResponse response = reservationServiceImpl.pay(new CreditCardDetailsDto(), UUID.randomUUID());
+
+        assertNotNull(response);
+    }
+
 
     @Test
     public void autoCancelExpiredReservations() {
@@ -107,4 +125,5 @@ public class ReservationServiceImplTest {
         verify(reservationRepository, times(1)).updateStatus( any(ReservationDto.class));
 
     }
+
 }
