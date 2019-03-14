@@ -13,6 +13,7 @@ import tech.lideo.flywithus.controller.dto.ReservationStatus;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
@@ -81,6 +82,21 @@ public class ReservationRepositoryImplTest {
     }
 
     @Test
+    public void getByStatus() {
+        ReservationDto reservationDto = reservationRepository.getAll().get(0);
+
+        ReservationStatus status = reservationDto.getStatus();
+
+        List<ReservationDto> byStatus = reservationRepository.getByStatus(status);
+
+        List<ReservationDto> notSameStatusList = byStatus.stream()
+                .filter(dto -> !status.equals(dto.getStatus()))
+                .collect(Collectors.toList());
+
+        assertThat( notSameStatusList.size(), equalTo(0));
+    }
+
+    @Test
     public void updateStatus() {
         ReservationDto reservationDto = reservationRepository.getAll().get(0);
         reservationDto.setStatus(ReservationStatus.CANCELLED);
@@ -99,4 +115,5 @@ public class ReservationRepositoryImplTest {
         reservationDto.setPrice(new BigDecimal(9));
         return reservationDto;
     }
+
 }

@@ -97,10 +97,9 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.updateStatus(res);
     }
 
-    //@Fixme should search only reservations with created status
     @Override
     public boolean autoCancelExpiredReservations() {
-        List<ReservationDto> reservations = reservationRepository.getAll();
+        List<ReservationDto> reservations = reservationRepository.getByStatus(ReservationStatus.CREATED);
         LocalDate now = LocalDate.now();
 
         reservations.forEach(reservationDto -> {

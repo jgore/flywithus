@@ -39,6 +39,14 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
+    public List<ReservationDto> getByStatus(ReservationStatus status) {
+        return reservations.stream()
+                .filter(dto -> status.equals(dto.getStatus()))
+                .map(this::copyReservation)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ReservationDto getBySecretCode(UUID secretCode) {
 
         return reservations.stream()

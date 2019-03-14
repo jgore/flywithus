@@ -59,6 +59,7 @@ public class ReservationServiceImplTest {
         reservationDto.setStatus(ReservationStatus.CREATED);
 
         when( reservationRepository.getAll()).thenReturn(Collections.singletonList(reservationDto));
+        when( reservationRepository.getByStatus(ReservationStatus.CREATED)).thenReturn(Collections.singletonList(reservationDto));
         ReflectionTestUtils.setField(reservationServiceImpl, "autoCancelDays", autoCancelDays);
         ReflectionTestUtils.setField(reservationServiceImpl, "cancelDays", cancelDays);
     }
@@ -102,7 +103,7 @@ public class ReservationServiceImplTest {
     public void autoCancelExpiredReservations() {
         reservationServiceImpl.autoCancelExpiredReservations();
 
-        verify(reservationRepository, times(1)).getAll();
+        verify(reservationRepository, times(1)).getByStatus(ReservationStatus.CREATED);
         verify(reservationRepository, times(1)).updateStatus( any(ReservationDto.class));
 
     }
