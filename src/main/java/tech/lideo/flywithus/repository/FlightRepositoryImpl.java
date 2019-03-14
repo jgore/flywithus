@@ -28,11 +28,12 @@ public class FlightRepositoryImpl implements FlightRepository {
 
     @Override
     public FlightDto get(Long id) {
-        FlightDto flightDto = flights.stream().
-                filter(dto -> id.equals(dto.getId())).
-                findFirst().orElse(null);
+        return flights.stream().
+                filter(dto -> id.equals(dto.getId()))
+                .map(this::copyFlightDto)
+                .findFirst()
+                .orElse(null);
 
-        return copyFlightDto(flightDto);
     }
 
     @Override

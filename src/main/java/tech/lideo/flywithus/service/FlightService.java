@@ -8,4 +8,5 @@ public interface FlightService {
 
     FlightDto create (FlightDto flightDto);
     List<FlightDto> getAll ( );
+    FlightDto get (Long id);
 }

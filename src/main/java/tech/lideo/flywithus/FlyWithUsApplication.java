@@ -39,7 +39,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        for (int i = 0; i < 100; i++) {
+   /*     for (int i = 0; i < 100; i++) {
             flightRepository.create(prepareFlight());
         }
 
@@ -62,7 +62,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
                 reservationService.create(reservationDto);
             }
 
-        }
+        }*/
     }
 
     //@FIXME refactor - copy paste to some common class

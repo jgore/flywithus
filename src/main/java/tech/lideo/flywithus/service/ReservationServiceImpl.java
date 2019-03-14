@@ -28,17 +28,21 @@ public class ReservationServiceImpl implements ReservationService {
 
     private String autoCancelDays;
 
+    private String cancelDays;
+
     @Autowired
     public ReservationServiceImpl(ReservationRepository reservationRepository,
                                   UserService userService,
                                   FlightRepository flightRepository,
                                   PriceService priceService,
-                                  @Value("${flywithus.autoCancel.days}") String autoCancelDays) {
+                                  @Value("${flywithus.autoCancel.days}") String autoCancelDays,
+                                  @Value("${flywithus.cancel.days}") String cancelDays) {
         this.reservationRepository = reservationRepository;
         this.userService = userService;
         this.flightRepository = flightRepository;
         this.priceService = priceService;
         this.autoCancelDays = autoCancelDays;
+        this.cancelDays = cancelDays;
     }
 
     @Override
@@ -78,15 +82,22 @@ public class ReservationServiceImpl implements ReservationService {
 
         ReservationDto res = reservationRepository.getBySecretCode(reservationSecretCode);
 
-        if( res == null)
-        {
-            throw new IllegalArgumentException(" secret code is incorrect");
+        if (res == null) {
+            throw new IllegalArgumentException(" secret code is incorrect - reservation does not exist");
+        }
+
+        FlightDto flightDto = flightRepository.get(res.getFlightId());
+        LocalDate departureDate = flightDto.getDepartureDate();
+
+        if (departureDate.isAfter( LocalDate.now().minusDays(Long.valueOf(cancelDays)))) {
+            throw new IllegalArgumentException(" Reservation can be CANCELLED only " + cancelDays + " days before departure");
         }
 
         res.setStatus(ReservationStatus.CANCELLED);
         return reservationRepository.updateStatus(res);
     }
 
+    //@Fixme should search only reservations with created status
     @Override
     public boolean autoCancelExpiredReservations() {
         List<ReservationDto> reservations = reservationRepository.getAll();

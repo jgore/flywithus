@@ -26,6 +26,8 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 public class ReservationServiceImplTest {
 
+    private UUID TEST_UUID = UUID.randomUUID();
+
     @Mock
     private ReservationRepository reservationRepository;
 
@@ -42,12 +44,15 @@ public class ReservationServiceImplTest {
     private ReservationServiceImpl reservationServiceImpl;
 
     private String autoCancelDays = "2";
+    private String cancelDays = "5";
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         when(userService.getByEmail(any())).thenReturn(new UserDto());
-        when(flightRepository.get(any())).thenReturn(new FlightDto());
+        FlightDto flightDto = new FlightDto();
+        flightDto.setDepartureDate( LocalDate.now());
+        when(flightRepository.get(any())).thenReturn(flightDto);
         when(reservationRepository.getBySecretCode(any(UUID.class))).thenReturn(new ReservationDto());
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setCreated( LocalDate.now().minusMonths(1));
@@ -55,6 +60,7 @@ public class ReservationServiceImplTest {
 
         when( reservationRepository.getAll()).thenReturn(Collections.singletonList(reservationDto));
         ReflectionTestUtils.setField(reservationServiceImpl, "autoCancelDays", autoCancelDays);
+        ReflectionTestUtils.setField(reservationServiceImpl, "cancelDays", cancelDays);
     }
 
 
@@ -74,11 +80,23 @@ public class ReservationServiceImplTest {
 
     @Test
     public void cancel() {
+        FlightDto longDepartureFlight = new FlightDto();
+        longDepartureFlight.setDepartureDate(LocalDate.now().minusDays(100));
+        when( flightRepository.get(any()) ).thenReturn(longDepartureFlight);
+
+        reservationServiceImpl.cancel(TEST_UUID);
+
+        verify(reservationRepository, times(1)).updateStatus(any(ReservationDto.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cancel__reservationWithEarlyDepartureShouldThrowEx() {
         reservationServiceImpl.cancel(UUID.randomUUID());
 
 
         verify(reservationRepository, times(1)).updateStatus(any(ReservationDto.class));
     }
+
 
     @Test
     public void autoCancelExpiredReservations() {

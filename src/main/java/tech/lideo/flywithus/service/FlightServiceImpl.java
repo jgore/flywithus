@@ -22,4 +22,11 @@ public class FlightServiceImpl implements FlightService {
     public List<FlightDto> getAll() {
         return flightRepository.getAll();
     }
+
+    @Override
+    public FlightDto get(Long id) {
+        return flightRepository.get(id);
+    }
+
+
 }
