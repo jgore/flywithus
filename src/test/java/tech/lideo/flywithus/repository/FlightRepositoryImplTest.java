@@ -10,10 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tech.lideo.flywithus.controller.dto.FlightDto;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -54,9 +55,9 @@ public class FlightRepositoryImplTest {
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
-        flightDto.setArrivalDate(new Date());
+        flightDto.setArrivalDate(LocalDate.now());
         flightDto.setDepartureCity("London");
-        flightDto.setDepartureDate(new Date());
+        flightDto.setDepartureDate(LocalDate.now());
 
         flightDto.setPrice(new BigDecimal(15));
 

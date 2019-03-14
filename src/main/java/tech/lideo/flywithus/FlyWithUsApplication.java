@@ -14,6 +14,7 @@ import tech.lideo.flywithus.repository.UserRepository;
 import tech.lideo.flywithus.service.ReservationService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @SpringBootApplication
@@ -38,7 +39,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             flightRepository.create(prepareFlight());
         }
 
@@ -61,16 +62,16 @@ public class FlyWithUsApplication implements CommandLineRunner {
                 reservationService.create(reservationDto);
             }
 
-        }*/
+        }
     }
 
     //@FIXME refactor - copy paste to some common class
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
-        flightDto.setArrivalDate(new Date());
+        flightDto.setArrivalDate(LocalDate.now());
         flightDto.setDepartureCity("London");
-        flightDto.setDepartureDate(new Date());
+        flightDto.setDepartureDate(LocalDate.now());
 
         flightDto.setPrice(new BigDecimal(15));
 

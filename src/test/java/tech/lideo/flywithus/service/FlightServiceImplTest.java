@@ -9,6 +9,7 @@ import tech.lideo.flywithus.controller.dto.FlightDto;
 import tech.lideo.flywithus.repository.FlightRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -41,9 +42,9 @@ public class FlightServiceImplTest {
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
-        flightDto.setArrivalDate(new Date());
+        flightDto.setArrivalDate(LocalDate.now());
         flightDto.setDepartureCity("London");
-        flightDto.setDepartureDate(new Date());
+        flightDto.setDepartureDate(LocalDate.now());
 
         flightDto.setPrice(new BigDecimal(15));
 

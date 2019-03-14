@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ReservationDto {
@@ -21,8 +22,6 @@ public class ReservationDto {
     private LocalDate created;
 
     public ReservationDto() {
-        status = ReservationStatus.CREATED;
-        created = LocalDate.now();
     }
 
 
@@ -99,5 +98,26 @@ public class ReservationDto {
 
     public void setPassengersAmount(int passengersAmount) {
         this.passengersAmount = passengersAmount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReservationDto that = (ReservationDto) o;
+        return getPassengersAmount() == that.getPassengersAmount() &&
+                isFastBriefing() == that.isFastBriefing() &&
+                Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getFlightId(), that.getFlightId()) &&
+                Objects.equals(getUserEmail(), that.getUserEmail()) &&
+                Objects.equals(getPrice(), that.getPrice()) &&
+                Objects.equals(getReservationSecretCode(), that.getReservationSecretCode()) &&
+                Objects.equals(getCreated(), that.getCreated()) &&
+                getStatus() == that.getStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFlightId(), getUserEmail(), getPrice(), getPassengersAmount(), getReservationSecretCode(), getCreated(), isFastBriefing(), getStatus());
     }
 }

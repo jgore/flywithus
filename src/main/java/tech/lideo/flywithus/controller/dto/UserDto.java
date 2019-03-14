@@ -1,6 +1,7 @@
 package tech.lideo.flywithus.controller.dto;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 public class UserDto {
 
@@ -23,5 +24,19 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(getEmail(), userDto.getEmail()) &&
+                Objects.equals(getPassword(), userDto.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getPassword());
     }
 }

@@ -12,27 +12,34 @@ import tech.lideo.flywithus.repository.ReservationRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    @Autowired
     private ReservationRepository reservationRepository;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private FlightRepository flightRepository;
 
-    @Autowired
     private PriceService priceService;
 
-    @Value("${flywithus.autoCancel.days}")
     private String autoCancelDays;
+
+    @Autowired
+    public ReservationServiceImpl(ReservationRepository reservationRepository,
+                                  UserService userService,
+                                  FlightRepository flightRepository,
+                                  PriceService priceService,
+                                  @Value("${flywithus.autoCancel.days}") String autoCancelDays) {
+        this.reservationRepository = reservationRepository;
+        this.userService = userService;
+        this.flightRepository = flightRepository;
+        this.priceService = priceService;
+        this.autoCancelDays = autoCancelDays;
+    }
 
     @Override
     public ReservationDto create(ReservationDto reservationDto) {
@@ -67,6 +74,20 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public ReservationDto cancel(UUID reservationSecretCode) {
+
+        ReservationDto res = reservationRepository.getBySecretCode(reservationSecretCode);
+
+        if( res == null)
+        {
+            throw new IllegalArgumentException(" secret code is incorrect");
+        }
+
+        res.setStatus(ReservationStatus.CANCELLED);
+        return reservationRepository.updateStatus(res);
+    }
+
+    @Override
     public boolean autoCancelExpiredReservations() {
         List<ReservationDto> reservations = reservationRepository.getAll();
         LocalDate now = LocalDate.now();
@@ -74,11 +95,11 @@ public class ReservationServiceImpl implements ReservationService {
         reservations.forEach(reservationDto -> {
             LocalDate created = reservationDto.getCreated();
 
-            if (created.minusDays(Long.valueOf( autoCancelDays)).isAfter(now) ) {
+            if (now.minusDays(Long.valueOf(autoCancelDays)).isAfter(created)) {
                 reservationDto.setStatus(ReservationStatus.AUTO_CANCELLED);
                 reservationRepository.updateStatus(reservationDto);
             }
         });
-        return false;
+        return true;
     }
 }

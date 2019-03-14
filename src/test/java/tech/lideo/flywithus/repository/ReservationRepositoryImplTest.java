@@ -12,6 +12,7 @@ import tech.lideo.flywithus.controller.dto.ReservationStatus;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
@@ -67,6 +68,18 @@ public class ReservationRepositoryImplTest {
         assertThat(reservationDto.getUserEmail(), equalTo(TEST_EMAIL));
     }
 
+
+    @Test
+    public void getBySecretCode() {
+        ReservationDto reservationDto = reservationRepository.getAll().get(0);
+
+        UUID reservationSecretCode = reservationDto.getReservationSecretCode();
+
+        ReservationDto bySecretCode = reservationRepository.getBySecretCode(reservationSecretCode);
+
+        assertEquals( reservationDto, bySecretCode);
+    }
+
     @Test
     public void updateStatus() {
         ReservationDto reservationDto = reservationRepository.getAll().get(0);
@@ -86,5 +99,4 @@ public class ReservationRepositoryImplTest {
         reservationDto.setPrice(new BigDecimal(9));
         return reservationDto;
     }
-
 }

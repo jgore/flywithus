@@ -12,7 +12,7 @@ import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.UserRepository;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -46,9 +46,9 @@ public class FlightUserIT {
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
-        flightDto.setArrivalDate(new Date());
+        flightDto.setArrivalDate(LocalDate.now() );
         flightDto.setDepartureCity("London");
-        flightDto.setDepartureDate(new Date());
+        flightDto.setDepartureDate(LocalDate.now());
 
         flightDto.setPrice(new BigDecimal(15));
 
