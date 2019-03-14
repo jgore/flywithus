@@ -10,7 +10,6 @@ public class FlightDto {
     private Date departureDate;
     private String arrivalCity;
     private Date arrivalDate;
-    private int passengersAmount;
     private BigDecimal price;
 
     public Long getId() {
@@ -51,14 +50,6 @@ public class FlightDto {
 
     public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
-    }
-
-    public int getPassengersAmount() {
-        return passengersAmount;
-    }
-
-    public void setPassengersAmount(int passengersAmount) {
-        this.passengersAmount = passengersAmount;
     }
 
     public BigDecimal getPrice() {

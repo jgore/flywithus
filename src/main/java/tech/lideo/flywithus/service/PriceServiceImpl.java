@@ -42,6 +42,8 @@ public class PriceServiceImpl implements PriceService {
             price = price.subtract(finaldiscount);
         }
 
+        price = price.multiply( BigDecimal.valueOf( reservationDto.getPassengersAmount()));
+
 
         return price.setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP);
     }

@@ -51,7 +51,6 @@ public class FlightUserIT {
         flightDto.setDepartureDate(new Date());
 
         flightDto.setPrice(new BigDecimal(15));
-        flightDto.setPassengersAmount(2);
 
         return flightDto;
     }

@@ -16,6 +16,7 @@ public class ReservationDto {
     @NotNull
     private BigDecimal price;
 
+    private int passengersAmount;
     private UUID reservationSecretCode;
     private LocalDate created;
 
@@ -90,5 +91,13 @@ public class ReservationDto {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public int getPassengersAmount() {
+        return passengersAmount;
+    }
+
+    public void setPassengersAmount(int passengersAmount) {
+        this.passengersAmount = passengersAmount;
     }
 }
