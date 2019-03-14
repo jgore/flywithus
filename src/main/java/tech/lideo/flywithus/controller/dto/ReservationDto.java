@@ -2,10 +2,13 @@ package tech.lideo.flywithus.controller.dto;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class ReservationDto {
 
+    private Long id;
     @NotNull
     private Long flightId;
     @NotNull
@@ -14,13 +17,24 @@ public class ReservationDto {
     private BigDecimal price;
 
     private UUID reservationSecretCode;
+    private LocalDate created;
 
     public ReservationDto() {
         status = ReservationStatus.CREATED;
+        created = LocalDate.now();
     }
+
 
     private boolean fastBriefing;
     private ReservationStatus status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getFlightId() {
         return flightId;
@@ -68,5 +82,13 @@ public class ReservationDto {
 
     public void setReservationSecretCode(UUID reservationSecretCode) {
         this.reservationSecretCode = reservationSecretCode;
+    }
+
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 }

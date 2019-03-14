@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tech.lideo.flywithus.controller.dto.ReservationDto;
+import tech.lideo.flywithus.controller.dto.ReservationStatus;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,16 +36,47 @@ public class ReservationRepositoryImplTest {
     }
 
     @Test
-    public void getByEmail() {
+    public void getByEmail__shouldReturnsReservationdByEmail() {
         List<ReservationDto> byEmail = reservationRepository.getByEmail(TEST_EMAIL);
         assertThat(byEmail.size(), equalTo(1));
+
+        assertEquals(byEmail.get(0).getUserEmail(), TEST_EMAIL);
     }
+
+    @Test
+    public void getAll__shouldReturnAllResevations() {
+
+        List<ReservationDto> byEmail = reservationRepository.getAll();
+        assertThat(byEmail.size(), equalTo(1));
+    }
+
 
     @Test
     public void create() {
         reservationRepository.create(prepareReservation());
 
         assertThat(reservationRepository.getCount(), equalTo(2));
+    }
+
+    @Test
+    public void get() {
+        ReservationDto reservationDto = reservationRepository.getAll().get(0);
+        assertNotNull(reservationDto);
+
+        assertThat( reservationDto.getFlightId(), equalTo(1L));
+        assertThat(reservationDto.getUserEmail(), equalTo(TEST_EMAIL));
+    }
+
+    @Test
+    public void updateStatus() {
+        ReservationDto reservationDto = reservationRepository.getAll().get(0);
+        reservationDto.setStatus(ReservationStatus.CANCELLED);
+
+        reservationRepository.updateStatus( reservationDto);
+
+        ReservationDto reservationDto1 = reservationRepository.get(reservationDto.getId());
+
+        assertEquals(reservationDto1.getStatus(), ReservationStatus.CANCELLED);
     }
 
     private ReservationDto prepareReservation() {

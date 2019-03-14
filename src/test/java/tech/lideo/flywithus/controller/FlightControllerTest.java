@@ -9,7 +9,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlyWithUsApplication;
+import tech.lideo.flywithus.repository.FlightRepository;
+import tech.lideo.flywithus.repository.UserRepository;
 import tech.lideo.flywithus.service.FlightService;
+import tech.lideo.flywithus.service.ReservationService;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,6 +30,17 @@ public class FlightControllerTest {
 
     @MockBean
     private FlightService flightService;
+
+    @MockBean
+    private FlightRepository flightRepository;
+
+    @MockBean
+    private UserRepository userRepository;
+
+    @MockBean
+    private ReservationService reservationService;
+
+
 
     @Test
     public void getFlights() throws Exception {

@@ -9,4 +9,6 @@ public interface ReservationService {
     ReservationDto create (ReservationDto reservationDto);
     List<ReservationDto> getByEmail(String email );
 
+    boolean autoCancelExpiredReservations();
+
 }
