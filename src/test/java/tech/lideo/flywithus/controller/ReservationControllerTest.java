@@ -9,10 +9,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlyWithUsApplication;
+import tech.lideo.flywithus.controller.dto.CreditCardDetailsDto;
 import tech.lideo.flywithus.controller.dto.ReservationDto;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.UserRepository;
 import tech.lideo.flywithus.service.ReservationService;
+
+import java.time.LocalDate;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -54,4 +57,33 @@ public class ReservationControllerTest {
                 .andExpect(status().isOk());
 
     }
+
+    @Test
+    public void cancelReservation() throws Exception {
+        mockMvc.perform(post("/api/reservation/cancel/71a5f1b5-e950-48ae-bd19-6171ead85779")
+                .contentType(APPLICATION_JSON)
+                .content("{}"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void payReservation() throws Exception {
+
+        CreditCardDetailsDto detailsDto = new CreditCardDetailsDto();
+        detailsDto.setAddress("1234");
+        detailsDto.setCardNumber("1234");
+        detailsDto.setCity("Wroclaw");
+        detailsDto.setCvv(1234);
+       // detailsDto.setExpirationDate(LocalDate.now().minusDays(100));
+        detailsDto.setName("John Doe");
+        String jsonCC = FlyWithUsApplication.gson.toJson(detailsDto);
+
+        mockMvc.perform(post("/api/reservation/pay/5e26e0ac-42ae-4ecf-b5bd-e3ec274e0078")
+                .contentType(APPLICATION_JSON)
+                .content(jsonCC))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 }

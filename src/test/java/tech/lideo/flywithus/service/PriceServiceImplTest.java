@@ -41,9 +41,11 @@ public class PriceServiceImplTest {
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setFastBriefing(true);
         reservationDto.setPassengersAmount(2);
-        BigDecimal price = priceService.calculateReservation(null, new FlightDto(), reservationDto);
+        FlightDto flightDto = new FlightDto();
+        flightDto.setPrice(new BigDecimal(50));
+        BigDecimal price = priceService.calculateReservation(null, flightDto, reservationDto);
 
-        assertThat(price, equalTo(new BigDecimal(100).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP)));
+        assertThat(price, equalTo(new BigDecimal(200).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP)));
 
     }
 
@@ -52,10 +54,12 @@ public class PriceServiceImplTest {
         ReservationDto reservationDto = new ReservationDto();
         reservationDto.setFastBriefing(true);
         reservationDto.setPassengersAmount(1);
-        BigDecimal price = priceService.calculateReservation(new UserDto(), new FlightDto(), reservationDto);
+        FlightDto flightDto = new FlightDto();
+        flightDto.setPrice(new BigDecimal(50));
+        BigDecimal price = priceService.calculateReservation(new UserDto(), flightDto, reservationDto);
 
 
-        assertThat(price, equalTo(new BigDecimal(47.50).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP)));
+        assertThat(price, equalTo(new BigDecimal(95.00).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_UP)));
 
     }
 }
