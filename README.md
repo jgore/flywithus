@@ -30,7 +30,7 @@ POST api/reservation - save resevation for flight
 }
 ```
 
-POST api/reservation/{reservationSercretCode} - cancel resevation for flight
+POST api/reservation/{reservationSercretCode} - cancel reservation for flight
 
 
 POST api/reservation/pay/{reservationSercretCode} - pay reservation  [ payment gateway will be opened soon ]
