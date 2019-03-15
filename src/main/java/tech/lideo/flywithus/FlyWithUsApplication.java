@@ -20,6 +20,7 @@ import java.util.Date;
 @SpringBootApplication
 @EnableScheduling
 //Fixme add mock server to payment service
+//Fixme add API doc to SWAGGER
 public class FlyWithUsApplication implements CommandLineRunner {
 
     public static final Gson gson = new Gson();

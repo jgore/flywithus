@@ -1,16 +1,13 @@
 package tech.lideo.flywithus.controller.dto;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class CreditCardDetailsDto {
 
     private String cardNumber ;
     private String name;
-    private String address;
-    private String city;
     private Integer cvv;
-    private LocalDate expirationDate;
+    private String expirationDate;
 
     public String getCardNumber() {
         return cardNumber;
@@ -28,22 +25,6 @@ public class CreditCardDetailsDto {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public Integer getCvv() {
         return cvv;
     }
@@ -52,11 +33,11 @@ public class CreditCardDetailsDto {
         this.cvv = cvv;
     }
 
-    public LocalDate getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -67,14 +48,12 @@ public class CreditCardDetailsDto {
         CreditCardDetailsDto that = (CreditCardDetailsDto) o;
         return Objects.equals(getCardNumber(), that.getCardNumber()) &&
                 Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getAddress(), that.getAddress()) &&
-                Objects.equals(getCity(), that.getCity()) &&
                 Objects.equals(getCvv(), that.getCvv()) &&
                 Objects.equals(getExpirationDate(), that.getExpirationDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCardNumber(), getName(), getAddress(), getCity(), getCvv(), getExpirationDate());
+        return Objects.hash(getCardNumber(), getName(), getCvv(), getExpirationDate());
     }
 }

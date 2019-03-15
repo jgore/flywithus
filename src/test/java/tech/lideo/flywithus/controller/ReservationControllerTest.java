@@ -71,11 +71,9 @@ public class ReservationControllerTest {
     public void payReservation() throws Exception {
 
         CreditCardDetailsDto detailsDto = new CreditCardDetailsDto();
-        detailsDto.setAddress("1234");
         detailsDto.setCardNumber("1234");
-        detailsDto.setCity("Wroclaw");
         detailsDto.setCvv(1234);
-       // detailsDto.setExpirationDate(LocalDate.now().minusDays(100));
+        detailsDto.setExpirationDate("10-21");
         detailsDto.setName("John Doe");
         String jsonCC = FlyWithUsApplication.gson.toJson(detailsDto);
 
