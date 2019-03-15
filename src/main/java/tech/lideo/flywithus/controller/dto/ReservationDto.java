@@ -24,6 +24,8 @@ public class ReservationDto {
     private UUID reservationSecretCode;
     @Null
     private LocalDate created;
+    @Null
+    private Boolean guest;
 
     public ReservationDto() {
     }
@@ -104,6 +106,14 @@ public class ReservationDto {
         this.passengersAmount = passengersAmount;
     }
 
+    public Boolean isGuest() {
+        return guest;
+    }
+
+    public void setGuest(Boolean guest) {
+        this.guest = guest;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,11 +127,12 @@ public class ReservationDto {
                 Objects.equals(getPrice(), that.getPrice()) &&
                 Objects.equals(getReservationSecretCode(), that.getReservationSecretCode()) &&
                 Objects.equals(getCreated(), that.getCreated()) &&
+                Objects.equals(guest, that.guest) &&
                 getStatus() == that.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFlightId(), getUserEmail(), getPrice(), getPassengersAmount(), getReservationSecretCode(), getCreated(), isFastBriefing(), getStatus());
+        return Objects.hash(getId(), getFlightId(), getUserEmail(), getPrice(), getPassengersAmount(), getReservationSecretCode(), getCreated(), guest, isFastBriefing(), getStatus());
     }
 }

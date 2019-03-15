@@ -42,6 +42,11 @@ public class FlightRepositoryImpl implements FlightRepository {
         if (flightDto.getId() != null) {
             throw new IllegalArgumentException(" id need to be null for new flights");
         }
+
+        if( flightDto.getPrice() == null)
+        {
+            throw new IllegalArgumentException("price cannot be null");
+        }
         FlightDto copy = copyFlightDto(flightDto);
         copy.setId(id++);
         flights.add(copy);

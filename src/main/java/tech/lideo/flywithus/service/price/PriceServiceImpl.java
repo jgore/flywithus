@@ -30,7 +30,7 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public BigDecimal calculateReservation(UserDto userDto, FlightDto flightDto, ReservationDto reservationDto) {
 
-        BigDecimal price = new BigDecimal(0);
+        BigDecimal price =  flightDto.getPrice();
 
         if (reservationDto.isFastBriefing()) {
             price = price.add(new BigDecimal(fastBriefPrice));

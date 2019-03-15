@@ -56,8 +56,9 @@ public class ReservationServiceImpl implements ReservationService {
         String userEmail = reservationDto.getUserEmail();
         UserDto userByEmail = userService.getByEmail(userEmail);
 
-        if (userByEmail == null) {
-            throw new IllegalArgumentException("user with given email does not exist : email =" + userEmail);
+        if( userByEmail == null)
+        {
+            reservationDto.setGuest(true);
         }
 
         Long flightId = reservationDto.getFlightId();
