@@ -10,14 +10,17 @@ user can pay for flight by reservation secret code
 
 user can cancel flight by reservation serce code 
 
-API :
+## API :
 
 GET /api/flight - get all flights [ search by fields will be done at frontend part ]
 
 POST /api/user - save user 
 {
+
   "email" : "XXX@gmail.com",
+  
   "password" : "XXXXX"
+  
 }
 
 POST api/reservation - save resevation for flight
@@ -32,7 +35,11 @@ POST api/reservation/{reservationSercretCode} - cancel resevation for flight
 POST api/reservation/pay/{reservationSercretCode} - pay reservation  [ payment gateway will be opened soon ]
 {
   "cardNumber" : "2222222222222222",
+  
   "name" : "John Doe",
+  
   "cvv" : "293"
+  
   "expirationDate" : "05/2023",
+  
 }
