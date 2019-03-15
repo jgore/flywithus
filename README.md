@@ -8,7 +8,7 @@ user can make a reservations for flight
 
 user can pay for flight by reservation secret code
 
-user can cancel flight by reservation serce code 
+user can cancel flight by reservation secret code 
 
 ## API :
 
