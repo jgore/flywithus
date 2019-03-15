@@ -46,3 +46,4 @@ POST api/reservation/pay/{reservationSercretCode} - pay reservation  [ payment g
 ### troubleshooting
 
 To have test data uncomment generation data test in FlyWithUsApplication
+To run all tests execute mvn test 
