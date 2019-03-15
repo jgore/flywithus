@@ -42,3 +42,7 @@ POST api/reservation/pay/{reservationSercretCode} - pay reservation  [ payment g
   "expirationDate" : "05/2023",
 }
 ```
+
+### troubleshooting
+
+To have test data uncomment generation data test in FlyWithUsApplication
