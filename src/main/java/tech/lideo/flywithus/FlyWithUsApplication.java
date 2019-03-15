@@ -24,14 +24,14 @@ public class FlyWithUsApplication implements CommandLineRunner {
 
     public static final Gson gson = new Gson();
 
-    @Autowired
+/*    @Autowired
     private FlightRepository flightRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private ReservationService reservationService;
+    private ReservationService reservationService;*/
 
     public static void main(String[] args) {
         SpringApplication.run(FlyWithUsApplication.class, args);
@@ -66,7 +66,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
         }*/
     }
 
-    //@FIXME refactor - copy paste to some common class
+  /*  //@FIXME refactor - copy paste to some common class
     private FlightDto prepareFlight() {
         FlightDto flightDto = new FlightDto();
         flightDto.setArrivalCity("wroclaw");
@@ -85,7 +85,7 @@ public class FlyWithUsApplication implements CommandLineRunner {
         userDto.setEmail("test");
         userDto.setPassword("testPW");
         return userDto;
-    }
+    }*/
 
 
 }

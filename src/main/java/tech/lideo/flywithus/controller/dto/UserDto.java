@@ -1,11 +1,13 @@
 package tech.lideo.flywithus.controller.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class UserDto {
 
     @NotNull
+    @Email
     private String email;
     @NotNull
     private String password;

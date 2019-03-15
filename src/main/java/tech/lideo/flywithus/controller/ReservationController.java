@@ -20,7 +20,7 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ReservationDto create(@RequestBody ReservationDto reservationDto) {
+    public ReservationDto create(@Valid @RequestBody ReservationDto reservationDto) {
         return reservationService.create(reservationDto);
     }
 

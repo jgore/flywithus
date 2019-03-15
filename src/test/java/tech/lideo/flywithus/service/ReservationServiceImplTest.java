@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
+import tech.lideo.flywithus.FlyWithUsApplication;
 import tech.lideo.flywithus.controller.dto.*;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.ReservationRepository;
@@ -125,5 +126,6 @@ public class ReservationServiceImplTest {
         verify(reservationRepository, times(1)).updateStatus( any(ReservationDto.class));
 
     }
+
 
 }

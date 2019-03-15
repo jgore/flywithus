@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import tech.lideo.flywithus.controller.dto.UserDto;
 import tech.lideo.flywithus.service.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -13,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public UserDto create(@RequestBody UserDto userDto) {
+    public UserDto create(@Valid @RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 

@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import tech.lideo.flywithus.FlyWithUsApplication;
+import tech.lideo.flywithus.controller.dto.ReservationDto;
 import tech.lideo.flywithus.repository.FlightRepository;
 import tech.lideo.flywithus.repository.UserRepository;
 import tech.lideo.flywithus.service.ReservationService;
@@ -39,9 +40,16 @@ public class ReservationControllerTest {
     @Test
     public void createReservation() throws Exception {
 
+        ReservationDto reservationDto = new ReservationDto();
+        reservationDto.setFlightId(1L);
+        reservationDto.setUserEmail("2");
+        reservationDto.setPassengersAmount(1);
+        String jsonFlight = FlyWithUsApplication.gson.toJson(reservationDto);
+
+
         mockMvc.perform(post("/api/reservation")
                 .contentType(APPLICATION_JSON)
-                .content("{}"))
+                .content(jsonFlight))
                 .andDo(print())
                 .andExpect(status().isOk());
 

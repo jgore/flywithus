@@ -1,24 +1,28 @@
 package tech.lideo.flywithus.controller.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 public class ReservationDto {
 
+    @Null
     private Long id;
     @NotNull
     private Long flightId;
     @NotNull
     private String userEmail;
-    @NotNull
+    @Null
     private BigDecimal price;
-
+    @Min(1)
     private int passengersAmount;
+    @Null
     private UUID reservationSecretCode;
+    @Null
     private LocalDate created;
 
     public ReservationDto() {
